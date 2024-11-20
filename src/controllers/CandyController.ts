@@ -4,7 +4,7 @@ import { Candy } from "../entities/Candy";
 
 const CandyRepository = AppDataSource.getRepository(Candy);
 
-// GET - Obtener Todos los Productos
+// GET - Obtener Todos los Dulces
 export const getAllCandy = async(red: Request, res: Response) => {
   try {
     const Candy = await CandyRepository.find();
@@ -14,7 +14,7 @@ export const getAllCandy = async(red: Request, res: Response) => {
   }
 };
 
-// GET by ID - Obetener Producto por ID
+// GET by ID - Obetener Dulce por ID
 export const getCandyById = async(req: Request, res: Response) => {
   try {
     const Candy = await CandyRepository.findOneBy({
@@ -31,7 +31,7 @@ export const getCandyById = async(req: Request, res: Response) => {
   }
 };
 
-// POST - Crear un nuevo Producto
+// POST - Crear un nuevo Dulce
 export const createCandy = async(req: Request, res: Response) => {
   try {
     const { name, description, price } = req.body;
@@ -40,14 +40,14 @@ export const createCandy = async(req: Request, res: Response) => {
     candy.description = description;
     candy.price = price;
 
-    await CandyRepository.save(Candy);
+    await CandyRepository.save(candy);
     res.status(201).json(Candy);
   } catch(error) {
     res.status(500).json({ message: "Error al crear el producto." });
   }
 };
 
-// PUT - Actualizar un Producto existente
+// PUT - Actualizar un Dulce existente
 export const updateCandy = async(req: Request, res: Response) => {
   try {
     const { name, description, price } = req.body;
@@ -70,7 +70,7 @@ export const updateCandy = async(req: Request, res: Response) => {
   }
 };
 
-// DELETE - Borrar un Producto
+// DELETE - Borrar un Dulce
 export const deleteCandy = async(req: Request, res: Response) => {
   try {
     const Candy = await CandyRepository.findOneBy({
